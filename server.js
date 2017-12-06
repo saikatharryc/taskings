@@ -23,7 +23,7 @@ app.use(function (err, req, res, next) {
     // render the error page
     res.status(err.status || err.errorCode || 500);
     // res.render('error');
-    res.json({ message: err.message || "Unknown Error Occured" });
+    res.json({ message: err.message || "Unknown Error Occured", err: err.err });
 });
 
 // production error handler
