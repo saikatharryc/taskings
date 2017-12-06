@@ -16,7 +16,7 @@ router.post('/create', (req, res, next) => {
 		return next({ message: "some error Occured", err: err });
 	});
 });
-router.get('/delete', (req, res, next) => {
+router.post('/delete', (req, res, next) => {
 	tasks.deleteTask(req).then(data => {
 		return res.json(data);
 	}).catch(err => {
