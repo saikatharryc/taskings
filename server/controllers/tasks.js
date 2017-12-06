@@ -22,12 +22,19 @@ function addTask(req, payload) {
 }
 function deleteTask(req) {
 	return new Promise((resolve, reject) => {
-		Task.remove({ _id: req.query.id }, (err) => {
+		Task.findOne({ _id: req.query.id }).exec((err, done) => {
 			if (err) {
 				return reject(err);
-			} else {
-				return resolve('deleted');
+			} else if (!done) {
+				return reject('doc Not found!');
 			}
+			done.remove((errs, deleted) => {
+				if (errs) {
+					return reject(errs);
+				}
+				return resolve(deleted);
+			});
+
 		});
 	});
 }	
