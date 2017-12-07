@@ -17,6 +17,15 @@ router.post('/create', (req, res, next) => {
 		return next({ message: "Cannot Create!", err: err, status: http_status.BAD_REQUEST });
 	});
 });
+router.post('/update', (req, res, next) => {
+	console.log('cammmee')
+	tasks.update(req, req.body).then(data => {
+		return res.json(data);
+	}).catch(err => {
+		return next({ message: "Cannot Update!", err: err, status: http_status.BAD_REQUEST });
+	});
+});
+
 router.post('/delete', (req, res, next) => {
 	tasks.deleteTask(req).then(data => {
 		return res.json(data);
