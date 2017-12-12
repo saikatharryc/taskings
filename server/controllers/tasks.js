@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Task = mongoose.model('Task');
 module.exports = {
 	getAll,
+	getById,
 	addTask,
 	update,
 	deleteTask
@@ -9,6 +10,11 @@ module.exports = {
 function getAll(req) {
 	return Task.find({}).exec();
 }
+
+function getById(req, payload) {
+	return Task.find({ _id: payload.id }).exec();
+}
+
 function addTask(req, payload) {
 	return new Promise((resolve, reject) => {
 		var a = new Task(payload);

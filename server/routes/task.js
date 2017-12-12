@@ -10,6 +10,16 @@ router.get('/', (req, res, next) => {
 		return next({ message: "Cannot Get!", err: err, status: http_status.BAD_REQUEST });
 	});
 });
+router.get('/:id', (req, res, next) => {
+	let payload = {
+		id: req.params.id
+	};
+	tasks.getById(req, payload).then(data => {
+		return res.json(data);
+	}).catch(err => {
+		return next({ message: "Cannot Get!", err: err, status: http_status.BAD_REQUEST });
+	});
+});
 router.post('/create', (req, res, next) => {
 	tasks.addTask(req, req.body).then(data => {
 		return res.json(data);
