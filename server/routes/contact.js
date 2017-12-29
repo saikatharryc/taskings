@@ -1,10 +1,10 @@
-var tasks = require("../controllers/tasks");
+var contact = require("../controllers/contact");
 var express = require("express");
 var http_status = require("http-status");
 var router = express.Router();
 
 router.get("/", (req, res, next) => {
-    tasks
+    contact
         .getAll(req)
         .then(data => {
             return res.json(data);
@@ -17,11 +17,11 @@ router.get("/", (req, res, next) => {
             });
         });
 });
-router.get("/by_id/:id", (req, res, next) => {
+router.get("/:id", (req, res, next) => {
     let payload = {
         id: req.params.id
     };
-    tasks
+    contact
         .getById(req, payload)
         .then(data => {
             return res.json(data);
@@ -34,9 +34,9 @@ router.get("/by_id/:id", (req, res, next) => {
             });
         });
 });
-router.post("/create", (req, res, next) => {
-    tasks
-        .addTask(req, req.body)
+router.post("/", (req, res, next) => {
+    contact
+        .addContact(req, req.body)
         .then(data => {
             return res.json(data);
         })
@@ -50,7 +50,7 @@ router.post("/create", (req, res, next) => {
 });
 router.post("/update", (req, res, next) => {
     console.log("cammmee");
-    tasks
+    contact
         .update(req, req.body)
         .then(data => {
             return res.json(data);
@@ -65,8 +65,8 @@ router.post("/update", (req, res, next) => {
 });
 
 router.post("/delete", (req, res, next) => {
-    tasks
-        .deleteTask(req)
+    contact
+        .deleteContact(req)
         .then(data => {
             return res.json(data);
         })
